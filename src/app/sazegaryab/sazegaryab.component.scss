@@ -1,0 +1,18 @@
+.box {
+  @apply flex flex-col gap-1;
+  label {
+    @apply py-2 px-3 font-irMed text-lg;
+  }
+  select {
+    @apply py-2 px-3 mr-5 border-2 border-gray-800 rounded-lg font-irMed w-64;
+  }
+}
+.item {
+  @apply text-lg font-medium text-center py-2;
+}
+.title {
+  @apply text-xl text-center font-irBold py-2;
+}
+* {
+  transition: all 0.4s;
+}

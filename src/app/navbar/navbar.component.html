@@ -1,0 +1,21 @@
+<div class="flex w-full justify-between items-center bg-c1 p-2 relative">
+    <div class="w-[360px] flex justify-start">
+        <h2 class="text-4xl text-white font-irBold mx-4" (click)="logOut()"><a class="cursor-pointer">پی‌‌‌‌‌‌‌ساز</a>
+        </h2>
+        <div class="flex gap-6">
+            <button type="button"
+                class="bg-c3 hover:bg-green-400 px-4 py-2 rounded-lg font-irReg border-2 border-slate-900"
+                routerLink="/profile/general">پروفایل</button>
+            <button routerLink="/sazegaryab" type="button"
+                class="bg-c3 hover:bg-green-400 px-4 py-2 rounded-lg font-irReg border-2 border-slate-900">سازگاریاب</button>
+        </div>
+    </div>
+    <div class="flex gap-2 items-center justify-around max-md:w-fit " type="button">
+        <button routerLink="profile/general"
+            class="max-md:hidden bg-c2 hover:bg-[#f0b33f]  py-2 px-3 flex flex-row-reverse gap-1 font-irBold border-2 border-slate-900 rounded-lg"
+            [class]="username == ' ' ? 'hidden':'block'" type="button">{{username}}
+            <img width="24" height="24" src="../../assets/img/user-svgrepo-com.svg" alt="پروفایل کاربر"> </button>
+        <button (click)="logOut()" type="button"
+            class="left-5 px-4 py-2 rounded-lg font-irReg bg-red-500 hover:bg-red-600 border-2 border-slate-900">ورود/خروج</button>
+    </div>
+</div>

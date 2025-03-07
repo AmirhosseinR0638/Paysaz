@@ -1,0 +1,24 @@
+<div class="w-full h-screen">
+    @if (addresses == null) {
+    <app-loader></app-loader>
+    }
+    <h2 class="mx-4 my-6 font-irXBold text-3xl">آدرس های ثبت شده</h2>
+    @for (address of addresses; track $index) {
+    <div
+        class="mx-6 flex max-sm:flex-row justify-between border-2 border-slate-500 rounded-lg p-3 px-4 my-5 hover:bg-slate-200">
+        <div class="w-11/12">
+            <h5 class="font-irBold text-xl;">{{address["province"]}}</h5>
+            <p class="font-irMed  pr-3 text-gray-700">{{address["remain_address"] | persianConverter:false }}</p>
+        </div>
+        <div class="w-1/12 flex justify-end max-sm:justify-start  my-auto max-sm:my-0 max-sm:w-fit">
+            <button
+                class="border-2 border-slate-900 bg-c2 hover:bg-[#e9ac3b] flex rounded-full justify-center items-center px-1 w-8 h-8"
+                (click)="findAddress(address)"><img src="./../../../assets/img/location.svg" alt="جستجو در نقشه"
+                    title="جستجو در نقشه"></button>
+        </div>
+    </div>
+    }
+    @empty {
+    <app-empty-content [content]="'آدرسی'" class="mx-auto"></app-empty-content>
+    }
+</div>

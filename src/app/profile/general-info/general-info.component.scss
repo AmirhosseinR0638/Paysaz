@@ -1,0 +1,12 @@
+* {
+  transition: all 0.4s;
+}
+.row {
+  @apply mr-8 flex justify-between border-2 border-slate-500 rounded-lg py-3 px-4 my-5 hover:bg-slate-200;
+  h5 {
+    @apply font-irBold text-xl;
+  }
+  p {
+    @apply font-irMed  pr-3 text-gray-700;
+  }
+}

@@ -1,0 +1,56 @@
+@if (user == null) {
+<app-loader></app-loader>
+}
+<div class="w-full h-[600px] overflow-auto">
+    <h2 class="font-irXBold pt-6 px-6 text-4xl">اطلاعات کلی</h2>
+    <div class="mx-auto w-11/12 flex justify-center py-1 px-4 my-5 hover:bg-slate-200;">
+        <img width="160" height="160" draggable="false" src="./../../../assets/img/user-profile-svgrepo-com.svg" alt="پروفایل">
+    </div>
+    <div class="flex w-full mt-2 justify-evenly max-lg:flex-col">
+        <div class="w-[48%] max-lg:w-full px-4">
+            <div class="row">
+                <h5>نام و نام خانوادگی</h5>
+                <p>{{user?.first_name + ' '+ user?.last_name}}</p>
+            </div>
+            <div class="row  max-sm:flex-col max-sm:gap-1">
+                <h5>موجودی کیف پول</h5>
+                <p>{{user?.wallet_balance | persianConverter:true }} تومان</p>
+            </div>
+            <div class="row">
+                <h5>کد معرف</h5>
+                <div class="flex flex-row justify-center items-center gap-2">
+                    <p>{{user?.referral_code | persianConverter:false }}</p>
+                    <button (click)="copyReferralCode()" type="button"
+                        class="flex justify-center items-center p-1 border-2 border-slate-900 rounded-full hover:bg-c2"><img
+                            [src]="icon"></button>
+                </div>
+            </div>
+            <div class="row max-xl:flex-col max-xl:gap-1">
+                <h5 class="text-sm">تعداد نفرات معرفی شده توسط شما</h5>
+                <p>{{user?.countUserReffer == 0 ? 'هنوز فردی را معرفی نکرده اید': (user?.countUserReffer |
+                    persianConverter:false )+ ' نفر'}}</p>
+            </div>
+        </div>
+        <div class="w-[48%] max-lg:w-full px-4">
+            <div class="row  max-sm:flex-col">
+                <h5>تاریخ ایجاد حساب</h5>
+                <p>{{user?.time_stamp.slice(0,10) | persianConverter:false}}</p>
+            </div>
+            <div class="row">
+                <h5>نوع حساب</h5>
+                <p>{{user?.vip_detail?.is_VIP ? 'ویژه':'عادی'}}</p>
+            </div>
+            @if (user?.vip_detail.is_VIP) {
+            <div class="row max-sm:flex-col max-sm:gap-1">
+                <h5>مدت زمان باقی مانده حساب ویژه</h5>
+                <p>{{user?.vip_detail.remaining_time | persianConverter:false }} روز</p>
+            </div>
+            <div class="row max-sm:flex-col max-sm:gap-1">
+                <h5>سود دریافتی</h5>
+                <p>{{user?.vip_detail.profit| persianConverter:false }} تومان</p>
+            </div>
+
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="w-full h-[650px] flex justify-center items-center">
+    <div class="bg-c2 w-[410px] h-[295px] rounded-lg border-2 border-blue-600">
+        <div class="w-custom1 pt-4 pb-2 my-2 text-2xl mx-auto border-b-2 border-white">
+            <h3 class="text-center font-irBold">ورود به سامانه</h3>
+        </div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form" class="flex flex-col">
+            <div class="w-custom1 px-2 mt-6 mx-auto flex flex-col gap-2">
+                <label for="input" class="font-irReg text-gray-800 my-1">شماره موبایل خود را وارد کنید:</label>
+                <input type="text" id="input" formControlName="phoneNumber"
+                    class="py-2 px-3 rounded-lg outline-none border-2 border-c1 font-irReg text-left"
+                    [ngClass]="{'border-red-700' : form.invalid && form.touched}">
+                <img class="absolute top-[380px] mr-2 w-9 h-9" draggable="false"
+                    src="./../../assets/img/phone-keys-svgrepo-com.svg" alt="شماره موبایل">
+                <span class="errorMsg" [hidden]="form.valid || form.untouched || showLoader">شماره موبایل نامعتبر
+                    است.</span>
+            </div>
+            <button type="submit" [disabled]="form.invalid || showLoader"
+                class="w-11/12 flex flex-row-reverse gap-2 justify-center items-center bg-c3 border-2 border-c1 rounded-lg py-1 my-6 mx-auto font-irMed disabled:opacity-70 disabled:cursor-not-allowed">
+                @if (showLoader) {
+                <div class="container">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                }
+                ورود
+            </button>
+        </form>
+    </div>
+</div>

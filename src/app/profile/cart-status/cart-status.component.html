@@ -1,0 +1,29 @@
+@if (carts == null) {
+<app-loader></app-loader>
+}
+<div class="w-full h-screen">
+    <h2 class="mx-4 my-6 font-irXBold text-3xl">وضعیت سبدهای خرید</h2>
+    <h4 class="font-irBold mx-7 text-gray-700" [class]="numberOfAvailableCarts==0 ? 'hidden':'block' ">تعداد سبدهای خرید
+        در دسترس: {{numberOfAvailableCarts|persianConverter:false}}
+    </h4>
+    <div class="w-full flex flex-wrap max-md:flex-col px-8 gap-3 mx-auto my-4">
+        @for (c of carts; track $index) {
+        <div class=" w-[48%] max-md:w-full border-2 rounded-lg py-3 px-5 border-gray-700"
+            [class]="c['cart_status'] == 'blocked' ? 'bg-red-400': (c['cart_status'] == 'locked'? 'bg-orange-400':'bg-green-400')">
+            <h5 class="font-irBold text-2xl">سبد شماره {{c["cart_number"] | persianConverter:false }}</h5>
+            @if (c['cart_status']== 'active') {
+            <p class="font-irMed text-lg px-3 text-gray-800">وضعیت سبد: فعال</p>
+            }
+            @else if (c['cart_status']== 'locked') {
+            <p class="font-irMed text-lg px-3 text-gray-800">وضعیت سبد: قفل شده</p>
+            }
+            @else {
+            <p class="font-irMed text-lg px-3 text-gray-800">وضعیت سبد: مسدودشده</p>
+            }
+        </div>
+        }
+        @empty {
+        <app-empty-content [content]="'سبد خریدی'" class="mx-auto mt-28"></app-empty-content>
+        }
+    </div>
+</div>

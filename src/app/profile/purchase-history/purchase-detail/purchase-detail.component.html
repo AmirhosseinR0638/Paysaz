@@ -1,0 +1,37 @@
+<div class="relative w-[345px] h-96 flex flex-col pt-3 pb-1 bg-c2 rounded-lg border-2 border-slate-800">
+    <div class="flex gap-[74px] w-full items-center">
+        <button (click)="closeComponent()" type="button" class="cursor-pointer mx-1 flex justify-center items-start">
+            <img draggable="false" width="40" height="40" src="./../../../../assets/img/closBtn.svg" alt="بستن">
+        </button>
+        <h4 class="text-center text-2xl font-irXBold">جزئیات خرید</h4>
+    </div>
+    <div class="overflow-auto gap-2 w-full h-64 py-3">
+        <h5 class="font-irBold text-lg px-2">کالاهای خریداری شده: </h5>
+        @for (p of Purchase.products; track $index) {
+        <div class="main">
+            <div class="flex flex-col gap-1">
+                <div class="box">
+                    <p class="titel">عنوان کالا: </p>
+                    <p class="value">{{p.brand + ' ' + p.model}}</p>
+                </div>
+                <div class="box">
+                    <p class="titel">دسته‌بندی کالا: </p>
+                    <p class="value">{{p.category}}</p>
+                </div>
+                <div class="box">
+                    <p class="titel">قیمت: </p>
+                    <p class="value">{{p.price + ' تومان'|persianConverter:true }}</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <p class="title">تعداد</p>
+                <p class="value">{{p.quantity|persianConverter:false}}</p>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="flex w-full p-2 justify-between absolute bottom-[8px] border-black border-t-2">
+        <h6 class="font-irBold text-xl">مجموع: </h6>
+        <p class="font-irBold text-xl">{{Purchase.total_price + ' تومان'|persianConverter:true }}</p>
+    </div>
+</div>

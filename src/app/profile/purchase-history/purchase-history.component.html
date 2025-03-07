@@ -1,0 +1,36 @@
+@if (purchases == null) {
+<app-loader></app-loader>
+}
+@if (showDetailComponent) {
+<div class="w-full h-full flex justify-center mt-32">
+    <app-purchase-detail (close)="showDetailComponent = false" [Purchase]="purchaseDTO"></app-purchase-detail>
+</div>
+}
+<div class="w-full py-3 px-5 h-full">
+    <h2 class="font-irXBold py-4 px-2 text-3xl">تاریخچه خریدها</h2>
+    @if(purchases !=null && purchases[0]?.total_price == 0) {
+    <app-empty-content [content]="'خریدی'"></app-empty-content>
+    }
+    @else {
+    <div class="w-full flex flex-wrap gap-5 mx-auto px-8 h-[520px] my-4">
+        @for (purchase of purchases; track $index) {
+        <div
+            class="bg-c2 py-2 px-3 border-2 rounded-xl shadow-lg hover:shadow-2xl w-64 h-52 border-slate-600 hover:border-slate-800">
+            <h5 class="text-2xl font-irBold border-b-2 border-slate-800 text-center pb-2">خرید شماره {{$index +
+                1|persianConverter:false}}</h5>
+            <div class="px-2 flex flex-col gap-3 py-3">
+                <p class="font-irReg text-lg">تعداد کالاهای سفارشی:
+                    {{purchase.products.length|persianConverter:false}}
+                </p>
+                <p class="font-irReg text-lg">مبلغ خرید: {{purchase.total_price + ' تومان'|persianConverter:true
+                    }}</p>
+                <button (click)="showDetail(purchase)" type="button"
+                    class=" w-full py-2 bg-c3 hover:bg-[#53d471] border-2 border-c1 rounded-lg font-irReg">مشاهده
+                    جزییات
+                    خرید</button>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>

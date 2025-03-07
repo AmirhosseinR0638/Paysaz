@@ -1,0 +1,121 @@
+<div class="w-full h-screen overflow-auto pb-16">
+    @if (isVIP==null) {
+    <app-loader></app-loader>
+    }
+    @else if (!isVIP) {
+    <app-not-accessible></app-not-accessible>
+    }
+    @else{
+    <h2 class="text-4xl font-irXBold mt-7 mr-9">سازگاریاب</h2>
+    <form [formGroup]="form" class="max-sm:pb-6 flex flex-col justify-center gap-5" (ngSubmit)="onSubmit()">
+        <div
+            class="w-full h-fit flex flex-col items-center gap-2 max-lg:flex-row max-xl:justify-evenly max-sm:flex-col">
+            <div class="flex gap-5 max-lg:flex-col">
+                <div class="box">
+                    <label for="MDB">Motherboard</label>
+                    <select (focus)="getMotherBoards()" formControlName="MotherBoard" name="MDB" id="MDB">
+                        <option value="null" selected>انتخاب نشده</option>
+                        @for (Mdb of MotherBoardList; track $index) {
+                        <option [value]="Mdb.product_id" selected>{{Mdb.brand + ' ' + Mdb.model}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="box">
+                    <label for="Cpu">CPU</label>
+                    <select (focus)="getCPUs()" formControlName="Cpu" name="CPU" id="Cpu">
+                        <option value="null" selected>انتخاب نشده</option>
+                        @for (cpu of CpuList; track $index) {
+                        <option [value]="cpu.product_id" selected>{{cpu.brand + ' ' + cpu.model}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="box">
+                    <label for="Gpu">GPU</label>
+                    <select (focus)="getGPUs()" formControlName="Gpu" name="GPU" id="Gpu">
+                        <option value="null" selected>انتخاب نشده</option>
+                        @for (gpu of GpuList; track $index) {
+                        <option [value]="gpu.product_id" selected>{{gpu.brand + ' ' + gpu.model}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="box">
+                    <label for="Ram">RAM</label>
+                    <select (focus)="getRAMs()" formControlName="Ram" name="RAN" id="Ram">
+                        <option value="null" selected>انتخاب نشده</option>
+                        @for (ram of RamList; track $index) {
+                        <option [value]="ram.product_id" selected>{{ram.brand + ' ' + ram.model}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="flex gap-5 max-lg:flex-col">
+                <div class="box">
+                    <label for="PS">PowerSupply</label>
+                    <select (click)="getPowerSupplies()" formControlName="PowerSupply" name="PS" id="PS">
+                        <option value="null" selected>انتخاب نشده</option>
+                        @for (ps of PowerSupplyList; track $index) {
+                        <option [value]="ps.product_id" selected>{{ps.brand + ' ' + ps.model}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="box">
+                    <label for="SSD">SSD</label>
+                    <select (click)="getSSDs()" formControlName="Ssd" name="Ssd" id="SSD">
+                        <option value="null" selected>انتخاب نشده</option>
+                        @for (ssd of SsdList; track $index) {
+                        <option [value]="ssd.product_id" selected>{{ssd.brand + ' ' + ssd.model}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="box">
+                    <label for="Cooler">Cooler</label>
+                    <select (click)="getCoolers()" formControlName="Cooler" name="Cooler" id="Cooler">
+                        <option value="null" selected>انتخاب نشده</option>
+                        @for (cooler of CoolerList; track $index) {
+                        <option [value]="cooler.product_id" selected>{{cooler.brand + ' ' + cooler.model}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="submit"
+            class="my-3 mx-auto py-2 w-80 border-2 border-slate-800 bg-c3 hover:bg-[#57c671] font-irMed text-lg rounded-lg">سازگار
+            کن</button>
+    </form>
+    <div class="border-2 border-slate-800 rounded-lg w-7/12 max-md:w-5/6 h-fit mx-auto">
+        <div class="flex flex-wrap justify-around px-4 items-center w-full border-b-2 border-slate-800 gap-3">
+            <div>
+                <h5 class="font-bold text-lg">فیلترکردن براساس: </h5>
+            </div>
+            @for (f of filterOption; track $index) {
+            <div class="flex justify-center items-center gap-1 py-4">
+                <input (input)="onFilter($event)" type="radio" name="filter" [checked]="f.isChecked" [id]="f.value"
+                    [value]="f.value">
+                <label class="font-medium" [for]="f.value">{{f.title}}</label>
+            </div>
+            }
+        </div>
+        <div class="h-fit overflow-auto">
+            @if (matchedProducts.length !=0) {
+            <table class="w-full overflow-scroll">
+                <thead class="border-b-2 border-slate-800 py-2">
+                    <th class="title">نام</th>
+                    <th class="title">مدل</th>
+                    <th class="title">دسته بندی</th>
+                </thead>
+                @for (p of matchedProducts; track $index) {
+                <tr class="border-b-2 border-slate-800 hover:bg-gray-200">
+                    <td class="item">{{p.brand}}</td>
+                    <td class="item">{{p.model}}</td>
+                    <td class="item">{{p.category}}</td>
+                </tr>
+                }
+            </table>
+            }
+            @if (matchedProducts. length == 0) {
+            <app-empty-content [content]="'موردی'" class="mt-8"></app-empty-content>
+            }
+        </div>
+    </div>
+    }
+</div>
